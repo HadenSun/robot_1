@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPainter>
 #include <QDebug>
+#include <QBitmap>
 
 namespace Ui {
 class MainWindow;
@@ -28,8 +29,11 @@ private slots:
     void on_rightGroundButton_clicked();
 
 private:
+    void showMapLeft();
+    void showMapRight();
+
     Ui::MainWindow *ui;
-    QPixmap pixmap;         //地图显示区域
+    QPixmap *pixmap;         //地图显示区域
     QBitmap robotBitmap;    //机器人位图
 };
 
