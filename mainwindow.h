@@ -5,10 +5,17 @@
 #include <QPainter>
 #include <QDebug>
 #include <QBitmap>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+
+
 
 namespace Ui {
 class MainWindow;
 }
+
+class QGraphicsScene;
+class QGraphicsView;
 
 class MainWindow : public QMainWindow
 {
@@ -32,9 +39,14 @@ private:
     void showMapLeft();
     void showMapRight();
 
+
     Ui::MainWindow *ui;
     QPixmap *pixmap;         //地图显示区域
     QBitmap robotBitmap;    //机器人位图
+    QGraphicsScene *scene;
+    QGraphicsView *view;
+
+
 };
 
 #endif // MAINWINDOW_H

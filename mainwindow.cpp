@@ -1,13 +1,28 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
+    scene(new QGraphicsScene(this)),
+    view(new QGraphicsView(scene,this)),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //在主界面添加view
+    ui->horizontalLayout->addWidget(view);
+    //设置scene大小
+    scene->setSceneRect(0,0,720,545);
+    //默认左上角
+    view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    view->setFixedSize(725,550);
+
+    //设置view背景
     pixmap = new QPixmap(720,545);
-    ui->label->setPixmap(*pixmap);
+    QPainter p(pixmap);
+    p.setBrush(QBrush(Qt::gray));
+    p.drawRect(0,0,720,545);
+    view->setBackgroundBrush(QBrush(*pixmap));
 }
 
 MainWindow::~MainWindow()
@@ -107,7 +122,7 @@ void MainWindow::showMapLeft()
     painter.drawPath(basketPath);
 
 
-    ui->label->setPixmap(*pixmap);
+    view->setBackgroundBrush(QBrush(*pixmap));
 }
 
 /* showMapRight
@@ -192,7 +207,7 @@ void MainWindow::showMapRight()
     painter.drawPath(basketPath);
 
 
-    ui->label->setPixmap(*pixmap);
+    view->setBackgroundBrush(QBrush(*pixmap));
 }
 
 /* on_restartButton_clicked
@@ -213,6 +228,7 @@ void MainWindow::on_restartButton_clicked()
 void MainWindow::on_leftGroundButton_clicked()
 {
     showMapLeft();
+
 }
 
 /* on_rightGroundButton_clicked
