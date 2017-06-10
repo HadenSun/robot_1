@@ -7,7 +7,8 @@
 #include <QBitmap>
 #include <QGraphicsView>
 #include <QGraphicsScene>
-
+#include "robotcontroller.h"
+#include "robot.h"
 
 
 namespace Ui {
@@ -16,6 +17,7 @@ class MainWindow;
 
 class QGraphicsScene;
 class QGraphicsView;
+class RobotController;
 
 class MainWindow : public QMainWindow
 {
@@ -41,10 +43,13 @@ private:
 
 
     Ui::MainWindow *ui;
-    QPixmap *pixmap;         //地图显示区域
-    QBitmap robotBitmap;    //机器人位图
+    QPixmap *pixmap;            //地图显示区域
+    QBitmap robotBitmap;        //机器人位图
     QGraphicsScene *scene;
     QGraphicsView *view;
+
+    RobotController *controller;
+
 
 
 };

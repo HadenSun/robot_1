@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "robotcontroller.h"
 #include "ui_mainwindow.h"
 
 
@@ -6,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     scene(new QGraphicsScene(this)),
     view(new QGraphicsView(scene,this)),
+    controller(new RobotController(*scene,this)),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -228,7 +230,8 @@ void MainWindow::on_restartButton_clicked()
 void MainWindow::on_leftGroundButton_clicked()
 {
     showMapLeft();
-
+    controller->setMapType(0);
+    controller->robotInit();
 }
 
 /* on_rightGroundButton_clicked
@@ -239,4 +242,6 @@ void MainWindow::on_leftGroundButton_clicked()
 void MainWindow::on_rightGroundButton_clicked()
 {
     showMapRight();
+    controller->setMapType(1);
+    controller->robotInit();
 }
