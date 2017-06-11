@@ -63,7 +63,7 @@ void Robot::setCoordinate(float x,float y)
     this->yOfCoordinate = y;
 
     xOfMap = centerXOfMap + x * 50;
-    yOfMap = centerYOfMap + y * 50;
+    yOfMap = centerYOfMap - y * 50;
 }
 
 /* setMapType
