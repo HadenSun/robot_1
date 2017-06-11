@@ -55,3 +55,16 @@ void RobotController::setMapType(int mapType)
         break;
     }
 }
+
+/* setRobotCoordinate
+ * 描述：设置robot坐标，给手动设置坐标提供接口
+ * 输入：x - X轴坐标
+ *      y - Y轴坐标
+ * 输出：无
+ */
+void RobotController::setRobotCoordinate(float x,float y)
+{
+    pRobot->setCoordinate(x,y);
+    scene.addItem(pRobot);
+    scene.update();
+}

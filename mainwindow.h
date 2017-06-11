@@ -37,6 +37,8 @@ private slots:
 
     void on_rightGroundButton_clicked();
 
+    void on_handPositionButton_clicked();
+
 private:
     void showMapLeft();
     void showMapRight();

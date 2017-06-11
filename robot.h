@@ -25,6 +25,8 @@ private:
     float yOfMap;
     float xOfCoordinate;    //坐标
     float yOfCoordinate;
+    float centerYOfMap;     //起始位置像素
+    float centerXOfMap;
     int mapType;            //球场类型，0-左半场，1-右半场
     RobotController &controller;
 };

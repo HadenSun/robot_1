@@ -62,21 +62,8 @@ void Robot::setCoordinate(float x,float y)
     this->xOfCoordinate = x;
     this->yOfCoordinate = y;
 
-    //换算像素
-    float xOfCenter;
-    float yOfCenter;
-
-    switch (mapType) {
-    case 0:
-        xOfMap = 635;
-        yOfMap = 510;
-        break;
-    case 1:
-        xOfMap = 85;
-        yOfMap = 510;
-    default:
-        break;
-    }
+    xOfMap = centerXOfMap + x * 50;
+    yOfMap = centerYOfMap + y * 50;
 }
 
 /* setMapType
@@ -88,4 +75,16 @@ void Robot::setCoordinate(float x,float y)
 void Robot::setMapType(int mapType)
 {
     this->mapType = mapType;
+    switch (mapType) {
+    case 0:
+        centerXOfMap = 635;
+        centerYOfMap = 510;
+        break;
+    case 1:
+        centerXOfMap = 85;
+        centerYOfMap = 510;
+        break;
+    default:
+        break;
+    }
 }

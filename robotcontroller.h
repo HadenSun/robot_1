@@ -21,6 +21,7 @@ public:
     ~RobotController();
     void robotInit(); //机器人初始化
     void setMapType(int mapType);
+    void setRobotCoordinate(float x,float y);
 
 private:
     QGraphicsScene &scene;

@@ -174,25 +174,32 @@
           <item>
            <widget class="QLineEdit" name="xLineEdit">
             <property name="readOnly">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLineEdit" name="yLineEdit">
             <property name="readOnly">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLineEdit" name="thetaLineEdit">
             <property name="readOnly">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="handPositionButton">
+          <property name="text">
+           <string>手动设置</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="Line" name="line_3">

@@ -245,3 +245,17 @@ void MainWindow::on_rightGroundButton_clicked()
     controller->setMapType(1);
     controller->robotInit();
 }
+
+/* on_handPositionButton_clicked
+ * 描述：手动设置机器人位置按钮点击事件
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::on_handPositionButton_clicked()
+{
+    float x,y;
+    x = ui->xLineEdit->text().toFloat();
+    y = ui->yLineEdit->text().toFloat();
+
+    controller->setRobotCoordinate(x,y);
+}
