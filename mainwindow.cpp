@@ -19,12 +19,19 @@ MainWindow::MainWindow(QWidget *parent) :
     view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     view->setFixedSize(725,550);
 
+
     //设置view背景
     pixmap = new QPixmap(720,545);
     QPainter p(pixmap);
     p.setBrush(QBrush(Qt::gray));
     p.drawRect(0,0,720,545);
     view->setBackgroundBrush(QBrush(*pixmap));
+
+    //默认初始化
+    ui->xLineEdit->setText("0");
+    ui->yLineEdit->setText("0");
+    ui->thetaLineEdit->setText("0");
+    mapType = 0;
 }
 
 MainWindow::~MainWindow()
@@ -219,7 +226,24 @@ void MainWindow::showMapRight()
  */
 void MainWindow::on_restartButton_clicked()
 {
-    qDebug() << this->size();
+    ui->xLineEdit->setText("0");
+    ui->yLineEdit->setText("0");
+    ui->thetaLineEdit->setText("0");
+
+    switch (mapType) {
+    case 0:
+        showMapLeft();
+        controller->setMapType(0);
+        controller->robotInit();
+        break;
+    case 1:
+        showMapRight();
+        controller->setMapType(1);
+        controller->robotInit();
+        break;
+    default:
+        break;
+    }
 }
 
 /* on_leftGroundButton_clicked
@@ -230,6 +254,7 @@ void MainWindow::on_restartButton_clicked()
 void MainWindow::on_leftGroundButton_clicked()
 {
     showMapLeft();
+    mapType = 0;
     controller->setMapType(0);
     controller->robotInit();
 }
@@ -242,6 +267,7 @@ void MainWindow::on_leftGroundButton_clicked()
 void MainWindow::on_rightGroundButton_clicked()
 {
     showMapRight();
+    mapType = 1;
     controller->setMapType(1);
     controller->robotInit();
 }

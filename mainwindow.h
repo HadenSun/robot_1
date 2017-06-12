@@ -46,11 +46,11 @@ private:
 
     Ui::MainWindow *ui;
     QPixmap *pixmap;            //地图显示区域
-    QBitmap robotBitmap;        //机器人位图
     QGraphicsScene *scene;
     QGraphicsView *view;
 
     RobotController *controller;
+    int mapType;                //场地类型，0-左半场，1-右半场
 
 
 

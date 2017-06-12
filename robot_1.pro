@@ -33,3 +33,8 @@ HEADERS  += mainwindow.h \
     robotcontroller.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    rs.qrc
+
+RC_FILE = source/logo.rc
