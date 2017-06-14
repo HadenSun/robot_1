@@ -8,6 +8,9 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QtNetwork>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QMessageBox>
 #include "robotcontroller.h"
 #include "robot.h"
 
@@ -44,6 +47,14 @@ private slots:
 
     void socket_readPendingDatagrams();
 
+    void on_comButton_clicked();
+
+    void com_readData();
+
+    void on_comRefreshButton_clicked();
+
+    void on_shotButton_clicked();
+
 private:
     void showMapLeft();
     void showMapRight();
@@ -60,6 +71,8 @@ private:
     QUdpSocket *udpSocket;      //socket的udp连接指针
     int socketStat;             //socket监听状态 0-未监听，1-监听
 
+    QSerialPort *comPort;       //串口连接指针
+    int comStat;
 
 };
 
