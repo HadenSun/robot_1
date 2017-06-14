@@ -7,6 +7,7 @@
 #include <QBitmap>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QtNetwork>
 #include "robotcontroller.h"
 #include "robot.h"
 
@@ -39,6 +40,10 @@ private slots:
 
     void on_handPositionButton_clicked();
 
+    void on_serverButton_clicked();
+
+    void socket_readPendingDatagrams();
+
 private:
     void showMapLeft();
     void showMapRight();
@@ -52,6 +57,8 @@ private:
     RobotController *controller;
     int mapType;                //场地类型，0-左半场，1-右半场
 
+    QUdpSocket *udpSocket;      //socket的udp连接指针
+    int socketStat;             //socket监听状态 0-未监听，1-监听
 
 
 };

@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->yLineEdit->setText("0");
     ui->thetaLineEdit->setText("0");
     mapType = 0;
+    socketStat = 0;
 }
 
 MainWindow::~MainWindow()
@@ -284,4 +285,50 @@ void MainWindow::on_handPositionButton_clicked()
     y = ui->yLineEdit->text().toFloat();
 
     controller->setRobotCoordinate(x,y);
+}
+
+
+/* on_serverButton_clicked
+ * 描述：建立udp的server端监听
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::on_serverButton_clicked()
+{
+    if(socketStat == 0)
+    {
+        ui->serverButton->setText("Server关闭");
+        int port = ui->portLineEdit->text().toInt();
+        if(port == 0)
+            port = 6655;
+        ui->portLineEdit->setText(QString::number(port));
+
+        udpSocket = new QUdpSocket(this);
+        udpSocket->bind(QHostAddress::LocalHost,port);
+        connect(udpSocket,SIGNAL(readyRead()),this,SLOT(socket_readPendingDatagrams()));
+        socketStat = 1;
+    }
+    else
+    {
+        ui->serverButton->setText("Server打开");
+        disconnect(udpSocket,SIGNAL(readyRead()),this,SLOT(socket_readPendingDatagrams()));
+        delete udpSocket;
+        socketStat = 0;
+    }
+}
+
+/* socket_readPendingDatagrams
+ * 描述：udp连接接收槽函数
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::socket_readPendingDatagrams()
+{
+    QByteArray datagram;
+    while(udpSocket->hasPendingDatagrams())
+    {
+        datagram.resize(udpSocket->pendingDatagramSize());
+        udpSocket->readDatagram(datagram.data(),datagram.size());
+        ui->socketLineEditer->setText(datagram.data());
+    }
 }
