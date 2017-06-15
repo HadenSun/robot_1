@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;H:\QT\5.7\msvc2015_64\include;H:\QT\5.7\msvc2015_64\include\QtWidgets;H:\QT\5.7\msvc2015_64\include\QtGui;H:\QT\5.7\msvc2015_64\include\QtANGLE;H:\QT\5.7\msvc2015_64\include\QtNetwork;H:\QT\5.7\msvc2015_64\include\QtCore;release;.;H:\QT\5.7\msvc2015_64\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;H:\QT\5.7\msvc2015_64\include;H:\QT\5.7\msvc2015_64\include\QtWidgets;H:\QT\5.7\msvc2015_64\include\QtGui;H:\QT\5.7\msvc2015_64\include\QtANGLE;H:\QT\5.7\msvc2015_64\include\QtNetwork;H:\QT\5.7\msvc2015_64\include\QtSerialPort;H:\QT\5.7\msvc2015_64\include\QtCore;release;.;H:\QT\5.7\msvc2015_64\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -65,7 +65,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>release\</ObjectFileName>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_SERIALPORT_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName></ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>H:\QT\5.7\msvc2015_64\lib\qtmain.lib;shell32.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Widgets.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Gui.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Network.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>H:\QT\5.7\msvc2015_64\lib\qtmain.lib;shell32.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Widgets.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Gui.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Network.lib;H:\QT\5.7\msvc2015_64\lib\Qt5SerialPort.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>H:\QT\5.7\msvc2015_64\lib;C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -93,12 +93,12 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_SERIALPORT_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;H:\QT\5.7\msvc2015_64\include;H:\QT\5.7\msvc2015_64\include\QtWidgets;H:\QT\5.7\msvc2015_64\include\QtGui;H:\QT\5.7\msvc2015_64\include\QtANGLE;H:\QT\5.7\msvc2015_64\include\QtNetwork;H:\QT\5.7\msvc2015_64\include\QtCore;debug;.;H:\QT\5.7\msvc2015_64\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;H:\QT\5.7\msvc2015_64\include;H:\QT\5.7\msvc2015_64\include\QtWidgets;H:\QT\5.7\msvc2015_64\include\QtGui;H:\QT\5.7\msvc2015_64\include\QtANGLE;H:\QT\5.7\msvc2015_64\include\QtNetwork;H:\QT\5.7\msvc2015_64\include\QtSerialPort;H:\QT\5.7\msvc2015_64\include\QtCore;debug;.;H:\QT\5.7\msvc2015_64\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -107,7 +107,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>debug\</ObjectFileName>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_SERIALPORT_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -116,7 +116,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>H:\QT\5.7\msvc2015_64\lib\qtmaind.lib;shell32.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Widgetsd.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Guid.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Networkd.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>H:\QT\5.7\msvc2015_64\lib\qtmaind.lib;shell32.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Widgetsd.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Guid.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Networkd.lib;H:\QT\5.7\msvc2015_64\lib\Qt5SerialPortd.lib;H:\QT\5.7\msvc2015_64\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>H:\QT\5.7\msvc2015_64\lib;C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -133,45 +133,34 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_SERIALPORT_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
-    <ClCompile Include="networker.cpp" />
     <ClCompile Include="robot.cpp" />
     <ClCompile Include="robotcontroller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">mainwindow.h;H:\QT\5.7\msvc2015_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtCore mainwindow.h -o release\moc_mainwindow.cpp</Command>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtSerialPort -IH:/QT/5.7/msvc2015_64/include/QtCore mainwindow.h -o release\moc_mainwindow.cpp</Command>
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC mainwindow.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_mainwindow.cpp;%(Outputs)</Outputs>
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">mainwindow.h;H:\QT\5.7\msvc2015_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtCore mainwindow.h -o debug\moc_mainwindow.cpp</Command>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtSerialPort -IH:/QT/5.7/msvc2015_64/include/QtCore mainwindow.h -o debug\moc_mainwindow.cpp</Command>
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC mainwindow.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_mainwindow.cpp;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="networker.h">
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">networker.h;H:\QT\5.7\msvc2015_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtCore networker.h -o release\moc_networker.cpp</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC networker.h</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_networker.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">networker.h;H:\QT\5.7\msvc2015_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtCore networker.h -o debug\moc_networker.cpp</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC networker.h</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_networker.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="robot.h" />
     <CustomBuild Include="robotcontroller.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">robotcontroller.h;H:\QT\5.7\msvc2015_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtCore robotcontroller.h -o release\moc_robotcontroller.cpp</Command>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtSerialPort -IH:/QT/5.7/msvc2015_64/include/QtCore robotcontroller.h -o release\moc_robotcontroller.cpp</Command>
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC robotcontroller.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_robotcontroller.cpp;%(Outputs)</Outputs>
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">robotcontroller.h;H:\QT\5.7\msvc2015_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtCore robotcontroller.h -o debug\moc_robotcontroller.cpp</Command>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">H:\QT\5.7\msvc2015_64\bin\moc.exe  -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -D_WIN64 -IH:/QT/5.7/msvc2015_64/mkspecs/win32-msvc2015 -IG:/Qt/robot_1 -IH:/QT/5.7/msvc2015_64/include -IH:/QT/5.7/msvc2015_64/include/QtWidgets -IH:/QT/5.7/msvc2015_64/include/QtGui -IH:/QT/5.7/msvc2015_64/include/QtANGLE -IH:/QT/5.7/msvc2015_64/include/QtNetwork -IH:/QT/5.7/msvc2015_64/include/QtSerialPort -IH:/QT/5.7/msvc2015_64/include/QtCore robotcontroller.h -o debug\moc_robotcontroller.cpp</Command>
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC robotcontroller.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_robotcontroller.cpp;%(Outputs)</Outputs>
     </CustomBuild>
@@ -181,12 +170,6 @@
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="release\moc_mainwindow.cpp">
-      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="debug\moc_networker.cpp">
-      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="release\moc_networker.cpp">
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="debug\moc_robotcontroller.cpp">

@@ -532,5 +532,13 @@ void MainWindow::on_comRefreshButton_clicked()
 
 void MainWindow::on_shotButton_clicked()
 {
+    if(comStat == 1)
+    {
+        comPort->clearError();
+        comPort->write("hello");
 
+        if(comPort->error() != QSerialPort::NoError)
+            QMessageBox::warning(NULL,"警告","数据发送失败！",QMessageBox::Yes);
+        comPort->clearError();
+    }
 }

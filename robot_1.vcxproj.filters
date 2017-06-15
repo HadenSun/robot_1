@@ -53,9 +53,6 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="networker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="robot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -65,9 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="networker.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="robot.h">
@@ -82,12 +76,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_mainwindow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_networker.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_networker.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_robotcontroller.cpp">
