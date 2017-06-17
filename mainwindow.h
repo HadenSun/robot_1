@@ -58,6 +58,7 @@ private slots:
 private:
     void showMapLeft();
     void showMapRight();
+    bool comCheckSum(unsigned char *data,int size);
 
 
     Ui::MainWindow *ui;

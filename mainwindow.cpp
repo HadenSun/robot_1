@@ -286,11 +286,12 @@ void MainWindow::on_rightGroundButton_clicked()
  */
 void MainWindow::on_handPositionButton_clicked()
 {
-    float x,y;
+    float x,y,theta;
     x = ui->xLineEdit->text().toFloat();
     y = ui->yLineEdit->text().toFloat();
+    theta = ui->thetaLineEdit->text().toFloat();
 
-    controller->setRobotCoordinate(x,y);
+    controller->setRobotCoordinate(x,y,theta);
 }
 
 
@@ -512,6 +513,35 @@ void MainWindow::on_comButton_clicked()
 void MainWindow::com_readData()
 {
     QByteArray arr = comPort->readAll();
+    unsigned char *data = (unsigned char *)arr.data();
+    QPalette palette;
+
+    if(data[0] == 0xA5 && data[1] == 0x5A)
+    {
+        if(comCheckSum(data,arr.size()))
+        {
+            palette.setColor(QPalette::Text,Qt::black);
+            //校验通过，图像更新
+            float x,y,theta;
+            x = data[2] / 100.0f;
+            y = data[3] / 100.0f;
+            theta = data[4] / 100.0f;
+            controller->setRobotSpeedFromArm(x,y,theta);
+
+            controller->getRobotCoordinate(&x,&y,&theta);
+            ui->xLineEdit->setText(QString::number(x));
+            ui->yLineEdit->setText(QString::number(y));
+            ui->thetaLineEdit->setText(QString::number(theta));
+        }
+        else
+            palette.setColor(QPalette::Text,Qt::red);
+    }
+    else
+    {
+        palette.setColor(QPalette::Text,Qt::red);
+    }
+
+    ui->comLineEdit->setPalette(palette);
     ui->comLineEdit->setText(arr.data());
 }
 
@@ -530,6 +560,11 @@ void MainWindow::on_comRefreshButton_clicked()
     }
 }
 
+/* on_shotButton_clicked
+ * 描述：弹射开关，现暂时用作串口发送
+ * 输入：无
+ * 输出：无
+ */
 void MainWindow::on_shotButton_clicked()
 {
     if(comStat == 1)
@@ -541,4 +576,23 @@ void MainWindow::on_shotButton_clicked()
             QMessageBox::warning(NULL,"警告","数据发送失败！",QMessageBox::Yes);
         comPort->clearError();
     }
+}
+
+/* comCheckSum
+ * 描述：串口接收数据和校验
+ * 输入：*data - 接收数据指针
+ *      size - 数据长度
+ * 输出：校验结果
+ */
+bool MainWindow::comCheckSum(unsigned char *data, int size)
+{
+    unsigned char checksum = 0;
+    for (int i = 1;i < size;i++) {
+        checksum += *data++;
+    }
+
+    if(checksum == *data)
+        return true;
+    else
+        return false;
 }

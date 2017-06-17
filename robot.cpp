@@ -22,7 +22,10 @@ Robot::~Robot()
 QPainterPath Robot::shape() const
 {
     QPainterPath path;
-    path.addRect(QRectF(xOfMap-15,yOfMap-15,30,30));
+    //相对于画笔原点，（-15，-15）位置为左上角，长宽30
+    path.moveTo(-7.5,-12.99);
+    path.arcTo(-15,-15,30,30,120,300);
+    //path.addRect(QRectF(-15,-15,30,30));
 
     return path;
 }
@@ -35,6 +38,11 @@ QPainterPath Robot::shape() const
 void Robot::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->save();
+    //painter原点移动到机器人中心位置
+    painter->translate(xOfMap,yOfMap);
+    //以机器人中心需安装
+    painter->rotate(theta);
+    //设置画笔填充颜色
     painter->fillPath(shape(),Qt::yellow);
     painter->restore();
 }
@@ -57,10 +65,11 @@ QRectF Robot::boundingRect() const
  *      y - Y轴位置
  * 输出：无
  */
-void Robot::setCoordinate(float x,float y)
+void Robot::setCoordinate(float x,float y ,float theta)
 {
     this->xOfCoordinate = x;
     this->yOfCoordinate = y;
+    this->theta = theta;
 
     xOfMap = centerXOfMap + x * 50;
     yOfMap = centerYOfMap - y * 50;
@@ -87,4 +96,19 @@ void Robot::setMapType(int mapType)
     default:
         break;
     }
+}
+
+float Robot::getXOfCoordinate()
+{
+    return xOfCoordinate;
+}
+
+float Robot::getYOfCoordinate()
+{
+    return yOfCoordinate;
+}
+
+float Robot::getTheta()
+{
+    return theta;
 }

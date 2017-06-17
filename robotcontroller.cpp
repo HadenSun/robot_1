@@ -62,9 +62,44 @@ void RobotController::setMapType(int mapType)
  *      y - Y轴坐标
  * 输出：无
  */
-void RobotController::setRobotCoordinate(float x,float y)
+void RobotController::setRobotCoordinate(float x,float y,float theta)
 {
-    pRobot->setCoordinate(x,y);
+    pRobot->setCoordinate(x,y,theta);
     scene.addItem(pRobot);
     scene.update();
+}
+
+/* setRobotSpeedFromArm
+ * 描述：通过串口获得10ms内运动，传递给robot类并显示
+ * 输入：x - x轴运动数据
+ *      y - y轴运动数据
+ *      theta - 自转运动数据
+ * 输出：无
+ */
+void RobotController::setRobotSpeedFromArm(float x, float y, float theta)
+{
+    float xOfCoordinate = pRobot->getXOfCoordinate();
+    float yOfCoordinate = pRobot->getYOfCoordinate();
+    float thetaOfCoordinate = pRobot->getTheta();
+
+    xOfCoordinate += x;
+    yOfCoordinate += y;
+    thetaOfCoordinate += theta;
+
+    while(thetaOfCoordinate > 360)
+        thetaOfCoordinate -= 360;
+
+    while(thetaOfCoordinate < 0)
+        thetaOfCoordinate += 360;
+
+    pRobot->setCoordinate(xOfCoordinate,yOfCoordinate,thetaOfCoordinate);
+    scene.addItem(pRobot);
+    scene.update();
+}
+
+void RobotController::getRobotCoordinate(float *x, float *y, float *theta)
+{
+    *x = pRobot->getXOfCoordinate();
+    *y = pRobot->getYOfCoordinate();
+    *theta = pRobot->getTheta();
 }

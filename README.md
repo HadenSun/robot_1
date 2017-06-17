@@ -21,3 +21,28 @@ source files
 &ensp;&ensp;└robotcontroller.cpp  
 ui files  
 &ensp;&ensp;└mainwindow.ui
+
+## Protocal
+### Serial Port
+#### GENERAL
+|START    |COMMAND|DATA    |CHECKSUM|
+|:-------:|:-----:|:------:|:------:|
+|0xA5 0x5A|(1 Byte)|(n Bytes)|(1 Byte) |
+#### MOVE DATA
+|START|COMMAND|DATA|CHECKSUM|
+|:---:|:-----:|:--:|:------:|
+|0-1|2|3 - 5|6|
+|0xA5 0x5A|0x00|0x20 0x03 0xA4|0xC6|  
+
+|Byte|Name|Description|
+|:--:|:--:|:---------:|
+|2|COMMAND|Move data command|
+|3|DATA|The distance of x axis in 10 ms. (0.01m)|
+|4|DATA|The distance of y axis in 10 ms. (0.01m)|
+|5|DATA|The angle of Theta in 10 ms. (0.01deg)|
+
+### UDP Socket
+#### GENERAL
+|ADDR|COMMAND|DATA|CHECKSUM|
+|:--:|:-----:|:--:|:------:|
+|(1 Byte)|(1 Byte)|(n Bytes)|(1 Byte)|
