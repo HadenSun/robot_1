@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     //在主界面添加view
-    ui->horizontalLayout->addWidget(view);
+    //ui->horizontalLayout->addWidget(view);
     //设置scene大小
     scene->setSceneRect(0,0,720,545);
     //默认左上角
@@ -30,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         ui->comComboBox->addItem(info.portName());
     }
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+        ui->comComboBox2->addItem(info.portName());
+    }
 
 
     //默认初始化
@@ -39,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mapType = 0;
     socketStat = 0;
     comStat = 0;
+    comStat2=0;
 }
 
 MainWindow::~MainWindow()
@@ -296,56 +300,64 @@ void MainWindow::on_handPositionButton_clicked()
 
 
 /* on_serverButton_clicked
- * 描述：建立udp的server端监听
+ * 描述：建立tcp的server端监听
  * 输入：无
  * 输出：无
  */
-void MainWindow::on_serverButton_clicked()
+void MainWindow::on_tcpserverButton_clicked()
 {
     if(socketStat == 0)
     {
         //获取端口
         int port = ui->portLineEdit->text().toInt();
         if(port == 0)
-            port = 6655;
+            port = 65432;
         ui->portLineEdit->setText(QString::number(port));
 
-        //初始化socket
-        udpSocket = new QUdpSocket(this);
-        udpSocket->bind(QHostAddress::LocalHost,port);
-        connect(udpSocket,SIGNAL(readyRead()),this,SLOT(socket_readPendingDatagrams()));
+        //初始化server
+        tcpServer = new QTcpServer(this);
+        tcpServer->listen(QHostAddress::Any,65432);
+        connect(tcpServer,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
 
         //ui部分调整
-        ui->serverButton->setText("Server关闭");
+        ui->tcpserverButton->setText("Server关闭");
         ui->portLineEdit->setEnabled(false);
         socketStat = 1;
     }
     else
     {
         //关闭socket
-        disconnect(udpSocket,SIGNAL(readyRead()),this,SLOT(socket_readPendingDatagrams()));
-        delete udpSocket;
+        disconnect(tcpServer,SIGNAL(newConnection())),this,SLOT(acceptConnection());
+        delete tcpServer;
         //ui调整
-        ui->serverButton->setText("Server打开");
+        ui->tcpserverButton->setText("Server打开");
         ui->portLineEdit->setEnabled(true);
         socketStat = 0;
     }
 }
 
-/* socket_readPendingDatagrams
- * 描述：udp连接接收槽函数
+/* acceptConnection
+ * 描述：tcp连接槽函数
  * 输入：无
  * 输出：无
  */
-void MainWindow::socket_readPendingDatagrams()
+void MainWindow::acceptConnection()
 {
-    QByteArray datagram;
-    while(udpSocket->hasPendingDatagrams())
-    {
-        datagram.resize(udpSocket->pendingDatagramSize());
-        udpSocket->readDatagram(datagram.data(),datagram.size());
-    }
-    ui->socketLineEditer->setText(datagram.data());
+
+    clientConnection=tcpServer->nextPendingConnection();
+    connect(clientConnection,SIGNAL(readyRead()),this,SLOT(readClient()));
+}
+/* readClient
+ * 描述：tcp接收槽函数
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::readClient()
+{
+
+    QString str=clientConnection->readAll();
+    ui->socketLineEditer->setText(str);
+
 }
 
 /* on_comButton_clicked
@@ -506,7 +518,7 @@ void MainWindow::on_comButton_clicked()
 }
 
 /* com_readData
- * 描述：COM口数据读入槽
+ * 描述：视觉COM口数据读入槽
  * 输入：无
  * 输出：无
  */
@@ -595,4 +607,217 @@ bool MainWindow::comCheckSum(unsigned char *data, int size)
         return true;
     else
         return false;
+}
+/* on_comButton2_clicked
+ * 描述：点击打开串口
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::on_comButton2_clicked()
+{
+
+    if(comStat2 == 0)
+    {
+        //获取选择的波特率
+        int baudId = ui->baudRateComboBox2->currentIndex();
+        QSerialPort::BaudRate baudRate;
+        switch (baudId) {
+        case 0:
+            baudRate = QSerialPort::Baud1200;
+            break;
+        case 1:
+            baudRate = QSerialPort::Baud2400;
+            break;
+        case 2:
+            baudRate = QSerialPort::Baud4800;
+            break;
+        case 3:
+            baudRate = QSerialPort::Baud9600;
+            break;
+        case 4:
+            baudRate = QSerialPort::Baud19200;
+            break;
+        case 5:
+            baudRate = QSerialPort::Baud38400;
+            break;
+        case 6:
+            baudRate = QSerialPort::Baud57600;
+            break;
+        case 7:
+            baudRate = QSerialPort::Baud115200;
+            break;
+        default:
+            QMessageBox::warning(NULL,"警告","无效波特率！",QMessageBox::Yes);
+            break;
+        }
+
+        //获取数据位
+        int dataBitsId = ui->dataBitsComboBox2->currentIndex();
+        QSerialPort::DataBits dataBits;
+        switch (dataBitsId) {
+        case 0:
+            dataBits = QSerialPort::Data5;
+            break;
+        case 1:
+            dataBits = QSerialPort::Data6;
+            break;
+        case 2:
+            dataBits = QSerialPort::Data7;
+            break;
+        case 3:
+            dataBits = QSerialPort::Data8;
+            break;
+        default:
+            QMessageBox::warning(NULL,"警告","无效数据位！",QMessageBox::Yes);
+            break;
+        }
+
+        //获取校验位
+        int parityId = ui->parityComboBox2->currentIndex();
+        QSerialPort::Parity parity;
+        switch (parityId) {
+        case 0:
+            parity = QSerialPort::NoParity;
+            break;
+        case 1:
+            parity = QSerialPort::EvenParity;
+            break;
+        case 2:
+            parity = QSerialPort::OddParity;
+            break;
+        case 3:
+            parity = QSerialPort::SpaceParity;
+            break;
+        case 4:
+            parity = QSerialPort::MarkParity;
+            break;
+        default:
+            QMessageBox::warning(NULL,"警告","无效校验位！",QMessageBox::Yes);
+            break;
+        }
+
+        //获取停止位
+        int stopBitsId = ui->stopBitsComboBox2->currentIndex();
+        QSerialPort::StopBits stopBits;
+        switch (stopBitsId) {
+        case 0:
+            stopBits = QSerialPort::OneStop;
+            break;
+        case 1:
+            stopBits = QSerialPort::OneAndHalfStop;
+            break;
+        case 2:
+            stopBits = QSerialPort::TwoStop;
+            break;
+        default:
+            QMessageBox::warning(NULL,"警告","无效停止位！",QMessageBox::Yes);
+            break;
+        }
+
+        QString comName = ui->comComboBox2->currentText();
+
+        //打开串口
+        comPort2 = new QSerialPort(comName);
+        if(comPort2->open(QIODevice::ReadWrite))
+        {
+            comPort2->setBaudRate(baudRate);
+            comPort2->setStopBits(stopBits);
+            comPort2->setParity(parity);
+            comPort2->setDataBits(dataBits);
+            comPort2->setFlowControl(QSerialPort::NoFlowControl);        //没有流控
+
+            comPort2->clearError();
+            comPort2->clear();
+            connect(comPort2,SIGNAL(readyRead()),this,SLOT(com_readData()));
+
+            //修改UI
+            ui->comButton2->setText("关闭串口");
+            ui->baudRateComboBox2->setEnabled(false);
+            ui->dataBitsComboBox2->setEnabled(false);
+            ui->parityComboBox2->setEnabled(false);
+            ui->stopBitsComboBox2->setEnabled(false);
+            ui->comComboBox2->setEnabled(false);
+            ui->comRefreshButton2->setEnabled(false);
+            comStat2 = 1;
+        }
+        else
+        {
+            //打开串口失败
+            QMessageBox::warning(NULL,"警告","打开串口失败",QMessageBox::Yes);
+            delete comPort2;
+        }
+
+    }
+    else
+    {
+        //关闭串口
+        comPort2->close();
+        delete comPort2;
+        //ui调整
+        ui->comButton2->setText("打开串口");
+        ui->baudRateComboBox2->setEnabled(true);
+        ui->dataBitsComboBox2->setEnabled(true);
+        ui->parityComboBox2->setEnabled(true);
+        ui->stopBitsComboBox2->setEnabled(true);
+        ui->comComboBox2->setEnabled(true);
+        ui->comRefreshButton2->setEnabled(true);
+        comStat2 = 0;
+    }
+}
+
+
+/* on_comRefreshButton2_clicked
+ * 描述：刷新按钮按下，刷新com口信息
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::on_comRefreshButton2_clicked()
+{
+    //清空原来内容
+    ui->comComboBox2->clear();
+    //遍历可用串口号
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+        ui->comComboBox2->addItem(info.portName());
+    }
+
+}
+
+/* com_readData
+ * 描述：32COM口数据读入槽
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::com2_readData()
+{
+    QByteArray arr = comPort2->readAll();
+    unsigned char *data = (unsigned char *)arr.data();
+    QPalette palette;
+
+    if(data[0] == 0xA5 && data[1] == 0x5A)
+    {
+        if(comCheckSum(data,arr.size()))
+        {
+            palette.setColor(QPalette::Text,Qt::black);
+            //校验通过，图像更新
+            float x,y,theta;
+            x = data[2] / 100.0f;
+            y = data[3] / 100.0f;
+            theta = data[4] / 100.0f;
+            controller->setRobotSpeedFromArm(x,y,theta);
+
+            controller->getRobotCoordinate(&x,&y,&theta);
+            ui->xLineEdit->setText(QString::number(x));
+            ui->yLineEdit->setText(QString::number(y));
+            ui->thetaLineEdit->setText(QString::number(theta));
+        }
+        else
+            palette.setColor(QPalette::Text,Qt::red);
+    }
+    else
+    {
+        palette.setColor(QPalette::Text,Qt::red);
+    }
+
+    ui->comLineEdit->setPalette(palette);
+    ui->comLineEdit->setText(arr.data());
 }
