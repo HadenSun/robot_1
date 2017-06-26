@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     //在主界面添加view
-    //ui->horizontalLayout->addWidget(view);
+    ui->horizontalLayout->addWidget(view);
     //设置scene大小
     scene->setSceneRect(0,0,720,545);
     //默认左上角

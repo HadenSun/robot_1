@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>748</width>
-    <height>506</height>
+    <height>581</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,8 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>488</x>
-      <y>177</y>
+      <x>248</x>
+      <y>176</y>
       <width>36</width>
       <height>16</height>
      </rect>
@@ -34,8 +34,8 @@
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>488</x>
-      <y>205</y>
+      <x>248</x>
+      <y>204</y>
       <width>36</width>
       <height>16</height>
      </rect>
@@ -47,8 +47,8 @@
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>488</x>
-      <y>233</y>
+      <x>248</x>
+      <y>232</y>
       <width>36</width>
       <height>16</height>
      </rect>
@@ -60,8 +60,8 @@
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>488</x>
-      <y>261</y>
+      <x>248</x>
+      <y>260</y>
       <width>36</width>
       <height>16</height>
      </rect>
@@ -73,8 +73,8 @@
    <widget class="QPushButton" name="comRefreshButton2">
     <property name="geometry">
      <rect>
-      <x>561</x>
-      <y>294</y>
+      <x>321</x>
+      <y>293</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -86,8 +86,8 @@
    <widget class="QComboBox" name="comComboBox2">
     <property name="geometry">
      <rect>
-      <x>486</x>
-      <y>295</y>
+      <x>246</x>
+      <y>294</y>
       <width>69</width>
       <height>20</height>
      </rect>
@@ -96,8 +96,8 @@
    <widget class="QPushButton" name="comButton2">
     <property name="geometry">
      <rect>
-      <x>486</x>
-      <y>328</y>
+      <x>246</x>
+      <y>327</y>
       <width>131</width>
       <height>23</height>
      </rect>
@@ -109,8 +109,8 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>486</x>
-      <y>357</y>
+      <x>246</x>
+      <y>356</y>
       <width>133</width>
       <height>20</height>
      </rect>
@@ -119,8 +119,8 @@
    <widget class="QComboBox" name="baudRateComboBox2">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>177</y>
+      <x>290</x>
+      <y>176</y>
       <width>121</width>
       <height>20</height>
      </rect>
@@ -169,8 +169,8 @@
    <widget class="QComboBox" name="dataBitsComboBox2">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>205</y>
+      <x>290</x>
+      <y>204</y>
       <width>69</width>
       <height>20</height>
      </rect>
@@ -199,8 +199,8 @@
    <widget class="QComboBox" name="parityComboBox2">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>233</y>
+      <x>290</x>
+      <y>232</y>
       <width>69</width>
       <height>20</height>
      </rect>
@@ -234,8 +234,8 @@
    <widget class="QComboBox" name="stopBitsComboBox2">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>261</y>
+      <x>290</x>
+      <y>260</y>
       <width>69</width>
       <height>20</height>
      </rect>
@@ -259,7 +259,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>230</x>
       <y>410</y>
       <width>42</width>
       <height>16</height>
@@ -275,10 +275,10 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>120</x>
       <y>410</y>
       <width>18</width>
-      <height>14</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -291,10 +291,10 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>410</y>
-      <width>42</width>
-      <height>14</height>
+      <x>22</x>
+      <y>412</y>
+      <width>18</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -307,8 +307,8 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
+      <x>0</x>
+      <y>10</y>
       <width>16</width>
       <height>506</height>
      </rect>
@@ -322,7 +322,7 @@
      <rect>
       <x>15</x>
       <y>102</y>
-      <width>702</width>
+      <width>391</width>
       <height>16</height>
      </rect>
     </property>
@@ -333,9 +333,9 @@
    <widget class="QLineEdit" name="socketLineEditer">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>20</x>
       <y>140</y>
-      <width>261</width>
+      <width>161</width>
       <height>21</height>
      </rect>
     </property>
@@ -345,7 +345,7 @@
      <rect>
       <x>15</x>
       <y>169</y>
-      <width>702</width>
+      <width>411</width>
       <height>16</height>
      </rect>
     </property>
@@ -358,7 +358,7 @@
      <rect>
       <x>16</x>
       <y>397</y>
-      <width>701</width>
+      <width>381</width>
       <height>20</height>
      </rect>
     </property>
@@ -371,7 +371,7 @@
      <rect>
       <x>15</x>
       <y>454</y>
-      <width>711</width>
+      <width>331</width>
       <height>23</height>
      </rect>
     </property>
@@ -384,7 +384,7 @@
      <rect>
       <x>15</x>
       <y>483</y>
-      <width>702</width>
+      <width>331</width>
       <height>16</height>
      </rect>
     </property>
@@ -397,7 +397,7 @@
      <rect>
       <x>15</x>
       <y>492</y>
-      <width>711</width>
+      <width>331</width>
       <height>23</height>
      </rect>
     </property>
@@ -410,7 +410,7 @@
      <rect>
       <x>16</x>
       <y>24</y>
-      <width>711</width>
+      <width>301</width>
       <height>23</height>
      </rect>
     </property>
@@ -423,7 +423,7 @@
      <rect>
       <x>16</x>
       <y>82</y>
-      <width>711</width>
+      <width>301</width>
       <height>23</height>
      </rect>
     </property>
@@ -436,31 +436,12 @@
      <rect>
       <x>16</x>
       <y>53</y>
-      <width>711</width>
+      <width>301</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>左半球场</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="portLineEdit">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>51</x>
-      <y>112</y>
-      <width>589</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>589</width>
-      <height>0</height>
-     </size>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -479,8 +460,8 @@
    <widget class="QPushButton" name="tcpserverButton">
     <property name="geometry">
      <rect>
-      <x>646</x>
-      <y>111</y>
+      <x>200</x>
+      <y>110</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -778,9 +759,9 @@
    <widget class="QLineEdit" name="xLineEdit">
     <property name="geometry">
      <rect>
-      <x>16</x>
+      <x>18</x>
       <y>431</y>
-      <width>133</width>
+      <width>61</width>
       <height>20</height>
      </rect>
     </property>
@@ -791,9 +772,9 @@
    <widget class="QLineEdit" name="yLineEdit">
     <property name="geometry">
      <rect>
-      <x>251</x>
-      <y>431</y>
-      <width>133</width>
+      <x>100</x>
+      <y>430</y>
+      <width>61</width>
       <height>20</height>
      </rect>
     </property>
@@ -804,8 +785,8 @@
    <widget class="QLineEdit" name="thetaLineEdit">
     <property name="geometry">
      <rect>
-      <x>486</x>
-      <y>431</y>
+      <x>190</x>
+      <y>430</y>
       <width>133</width>
       <height>20</height>
      </rect>
@@ -813,6 +794,27 @@
     <property name="readOnly">
      <bool>false</bool>
     </property>
+   </widget>
+   <widget class="QLineEdit" name="portLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>110</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>0</y>
+      <width>711</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
