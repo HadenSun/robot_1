@@ -2,6 +2,10 @@
 #include "robotcontroller.h"
 #include "ui_mainwindow.h"
 
+int socketStat=0;
+int port;
+Tcpserver * tcpserver = new Tcpserver;
+QByteArray str;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -37,8 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->yLineEdit->setText("0");
     ui->thetaLineEdit->setText("0");
     mapType = 0;
-    socketStat = 0;
     comStat = 0;
+
 }
 
 MainWindow::~MainWindow()
@@ -300,36 +304,63 @@ void MainWindow::on_handPositionButton_clicked()
  * 输入：无
  * 输出：无
  */
-void MainWindow::on_serverButton_clicked()
+
+  void MainWindow::on_serverButton_clicked()
 {
+
     if(socketStat == 0)
     {
         //获取端口
-        int port = ui->portLineEdit->text().toInt();
+        port = ui->portLineEdit->text().toInt();
         if(port == 0)
             port = 65432;
         ui->portLineEdit->setText(QString::number(port));
-
-        //初始化server
-        tcpserver = new QTcpServer(this);
-        tcpserver->listen(QHostAddress::Any,65432);
-        connect(tcpserver,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
 
         //ui部分调整
         ui->serverButton->setText("Server关闭");
         ui->portLineEdit->setEnabled(false);
         socketStat = 1;
+        tcpserver->getlisten();
+        //连接tcp数据与ui数据
+        connect(tcpserver,SIGNAL(renew_ui()),this,SLOT(ui_tcpData()));
+        //ui->socketLineEditer->setText(str);
     }
     else
     {
-        //关闭socket
-        disconnect(tcpserver,SIGNAL(newConnection())),this,SLOT(acceptConnection());
-        delete tcpserver;
         //ui调整
         ui->serverButton->setText("Server打开");
         ui->portLineEdit->setEnabled(true);
         socketStat = 0;
+       // tcpserver->getlisten();
     }
+}
+
+
+
+
+/*listenConnection
+ *描述:tcp监听槽函数
+ *输入
+ *输出
+ * bug:全局变量tcpserver无法delete,在程序启动时只能按一次server启动,server关闭后需重启控制系统
+ */
+void Tcpserver::listenConnection()
+{
+    if(socketStat==1)
+    {
+        tcpserver->listen(QHostAddress::Any,port);
+        connect(tcpserver,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
+    }
+    /*
+     else
+    {
+      disconnect(tcpserver,SIGNAL(newConnection())),this,SLOT(acceptConnection());
+    //  delete tcpserver;
+    }
+    */
+
+
+
 }
 
 /* acceptConnection
@@ -337,24 +368,32 @@ void MainWindow::on_serverButton_clicked()
  * 输入：无
  * 输出：无
  */
-void MainWindow::acceptConnection()
+void Tcpserver::acceptConnection()
 {
 
     clientConnection=tcpserver->nextPendingConnection();
     connect(clientConnection,SIGNAL(readyRead()),this,SLOT(readClient()));
 }
 /* readClient
- * 描述：tcp接收槽函数
+ * 描述：tcp接收槽函数并开启新线程
  * 输入：无
  * 输出：无
  */
-void MainWindow::readClient()
+void Tcpserver::readClient()
+{   emit renew_ui();  // 发出信号->更新socketLineEditer
+    Thread *newthread = new Thread;
+    str=clientConnection->readAll();
+    newthread->start();
+
+}
+/* ui_tcpData
+ * 描述：ui更新socket发送的数据
+ * 输入：无
+ * 输出：无
+ */
+void MainWindow::ui_tcpData()
 {
-
-    QString str=clientConnection->readAll();
     ui->socketLineEditer->setText(str);
-    //comPort->write(str)
-
 }
 
 /* on_comButton_clicked
@@ -605,3 +644,4 @@ bool MainWindow::comCheckSum(unsigned char *data, int size)
     else
         return false;
 }
+

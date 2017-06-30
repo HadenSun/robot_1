@@ -7,12 +7,18 @@
 #include <QBitmap>
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include <QtNetwork>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QMessageBox>
 #include "robotcontroller.h"
 #include "robot.h"
+#include <QByteArray>
+
+
+
+
+
+
 
 
 namespace Ui {
@@ -45,9 +51,7 @@ private slots:
 
     void on_serverButton_clicked();
 
-    void acceptConnection();
-
-    void readClient();
+    void ui_tcpData();
 
     void on_comButton_clicked();
 
@@ -71,13 +75,11 @@ private:
     RobotController *controller;
     int mapType;                //场地类型，0-左半场，1-右半场
 
-    QTcpServer *tcpserver;
-    QTcpSocket *clientConnection; //socket的tcp连接指针
-    int socketStat;             //socket监听状态 0-未监听，1-监听
-
     QSerialPort *comPort;       //串口连接指针
     int comStat;
 
 };
+
+
 
 #endif // MAINWINDOW_H
