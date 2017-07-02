@@ -1,10 +1,13 @@
 #include "mainwindow.h"
 #include "robotcontroller.h"
 #include "ui_mainwindow.h"
+#include "tcpsocket.h"
+#include "thread.h"
 
 int socketStat=0;
 int port;
-Tcpserver * tcpserver = new Tcpserver;
+Tcpserver * rplidarserver ;
+Tcpserver * shijueserver = new Tcpserver;
 QByteArray str;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -320,10 +323,10 @@ void MainWindow::on_handPositionButton_clicked()
         ui->serverButton->setText("Server关闭");
         ui->portLineEdit->setEnabled(false);
         socketStat = 1;
-        tcpserver->getlisten();
+        rplidarserver= new Tcpserver;
+        rplidarserver->getlisten();
         //连接tcp数据与ui数据
-        connect(tcpserver,SIGNAL(renew_ui()),this,SLOT(ui_tcpData()));
-        //ui->socketLineEditer->setText(str);
+        connect(rplidarserver,SIGNAL(renew_ui()),this,SLOT(ui_rplidarData()));
     }
     else
     {
@@ -331,7 +334,7 @@ void MainWindow::on_handPositionButton_clicked()
         ui->serverButton->setText("Server打开");
         ui->portLineEdit->setEnabled(true);
         socketStat = 0;
-       // tcpserver->getlisten();
+        rplidarserver->getlisten();
     }
 }
 
@@ -342,22 +345,22 @@ void MainWindow::on_handPositionButton_clicked()
  *描述:tcp监听槽函数
  *输入
  *输出
- * bug:全局变量tcpserver无法delete,在程序启动时只能按一次server启动,server关闭后需重启控制系统
+ *
  */
 void Tcpserver::listenConnection()
 {
     if(socketStat==1)
     {
-        tcpserver->listen(QHostAddress::Any,port);
-        connect(tcpserver,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
+        rplidarserver->listen(QHostAddress::Any,port);
+        connect(rplidarserver,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
     }
-    /*
+
      else
     {
-      disconnect(tcpserver,SIGNAL(newConnection())),this,SLOT(acceptConnection());
-    //  delete tcpserver;
+     disconnect(rplidarserver,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
+     delete rplidarserver;
     }
-    */
+
 
 
 
@@ -371,8 +374,8 @@ void Tcpserver::listenConnection()
 void Tcpserver::acceptConnection()
 {
 
-    clientConnection=tcpserver->nextPendingConnection();
-    connect(clientConnection,SIGNAL(readyRead()),this,SLOT(readClient()));
+    rplidarConnection=rplidarserver->nextPendingConnection();
+    connect(rplidarConnection,SIGNAL(readyRead()),this,SLOT(readClient()));
 }
 /* readClient
  * 描述：tcp接收槽函数并开启新线程
@@ -381,8 +384,8 @@ void Tcpserver::acceptConnection()
  */
 void Tcpserver::readClient()
 {   emit renew_ui();  // 发出信号->更新socketLineEditer
-    Thread *newthread = new Thread;
-    str=clientConnection->readAll();
+    Thread1 *newthread = new Thread1;
+    str=rplidarConnection->readAll();
     newthread->start();
 
 }
@@ -391,7 +394,7 @@ void Tcpserver::readClient()
  * 输入：无
  * 输出：无
  */
-void MainWindow::ui_tcpData()
+void MainWindow::ui_rplidarData()
 {
     ui->socketLineEditer->setText(str);
 }
@@ -566,6 +569,7 @@ void MainWindow::com_readData()
 
     if(data[0] == 0xA5 && data[1] == 0x5A)
     {
+        qDebug()<<"already in";
         if(comCheckSum(data,arr.size()))
         {
             palette.setColor(QPalette::Text,Qt::black);
@@ -574,8 +578,8 @@ void MainWindow::com_readData()
             x = data[2] / 100.0f;
             y = data[3] / 100.0f;
             theta = data[4] / 100.0f;
+            qDebug()<<"here";
             controller->setRobotSpeedFromArm(x,y,theta);
-
             controller->getRobotCoordinate(&x,&y,&theta);
             ui->xLineEdit->setText(QString::number(x));
             ui->yLineEdit->setText(QString::number(y));

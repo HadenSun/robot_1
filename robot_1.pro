@@ -26,11 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     robot.cpp \
-    robotcontroller.cpp
+    robotcontroller.cpp \
+    thread.cpp
 
 HEADERS  += mainwindow.h \
     robot.h \
-    robotcontroller.h
+    robotcontroller.h \
+    tcpsocket.h \
+    thread.h
 
 FORMS    += mainwindow.ui
 

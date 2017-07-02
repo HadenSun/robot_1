@@ -104,10 +104,4 @@ void RobotController::getRobotCoordinate(float *x, float *y, float *theta)
     *theta = pRobot->getTheta();
 }
 
-void Thread::run()
-{
-    while(1)
-    {
-   qDebug()<<str;
-    }
-}
+

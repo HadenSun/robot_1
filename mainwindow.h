@@ -12,7 +12,7 @@
 #include <QMessageBox>
 #include "robotcontroller.h"
 #include "robot.h"
-#include <QByteArray>
+
 
 
 
@@ -51,7 +51,7 @@ private slots:
 
     void on_serverButton_clicked();
 
-    void ui_tcpData();
+    void ui_rplidarData();
 
     void on_comButton_clicked();
 
@@ -63,7 +63,9 @@ private slots:
 
 private:
     void showMapLeft();
+
     void showMapRight();
+
     bool comCheckSum(unsigned char *data,int size);
 
 
