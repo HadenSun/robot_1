@@ -2,6 +2,7 @@
 #define TCPSOCKET_H
 #include <QtNetwork>
 #include <QByteArray>
+#include <QString>
 
 extern int socketStat; //socket监听状态 0-未监听，1-监听
 extern QByteArray lidar;

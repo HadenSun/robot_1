@@ -387,31 +387,46 @@ void Tcpserver::acceptConnection()
 
 
 }
+
+
 /* readClient
- * 描述：tcp接收槽函数并开启新线程
+ * 描述：tcp接收槽函数并开启新线程 雷达
  * 输入：无
  * 输出：无
  */
 void Tcpserver::readClient()
 
-{   lidar=rplidarConnection->readAll();
-    emit renew_ui();  // 发出信号->更新socketLineEditer
+{
+    lidar=rplidarConnection->readAll();
+
+    emit renew_ui(); // 发出信号->更新socketLineEditer
+
     Thread1 *newthread1 = new Thread1;
     newthread1->start();
-
 }
+
+/* sockSend
+ * 描述：socket发送槽函数 视觉
+ * 输入：无
+ * 输出：无
+ */
 
 void Tcpserver::sockSend()
 {
     shijueConnection->write(shijue);
 }
 
+/* readwriteClient
+ * 描述：tcp接收槽函数并开启新线程 视觉
+ * 输入：无
+ * 输出：无
+ */
 void Tcpserver::readwriteClient()
 {
-shijue=shijueConnection->readAll();
-Thread2 *newthread2 = new Thread2;
-connect(newthread2,SIGNAL(sendData()),server,SLOT(sockSend()));
-newthread2->start();
+     shijue=shijueConnection->readAll();
+     Thread2 *newthread2 = new Thread2;
+     newthread2->start();
+     connect(newthread2,SIGNAL(sendData()),this,SLOT(sockSend()));
 
 }
 /* ui_tcpData
