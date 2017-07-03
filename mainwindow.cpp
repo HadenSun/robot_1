@@ -6,9 +6,9 @@
 
 int socketStat=0;
 int port;
-Tcpserver * rplidarserver ;
-Tcpserver * shijueserver = new Tcpserver;
-QByteArray str;
+Tcpserver *server ;
+QByteArray lidar;
+QByteArray shijue;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -323,10 +323,10 @@ void MainWindow::on_handPositionButton_clicked()
         ui->serverButton->setText("Server关闭");
         ui->portLineEdit->setEnabled(false);
         socketStat = 1;
-        rplidarserver= new Tcpserver;
-        rplidarserver->getlisten();
+        server= new Tcpserver;
+        server->getlisten();
         //连接tcp数据与ui数据
-        connect(rplidarserver,SIGNAL(renew_ui()),this,SLOT(ui_rplidarData()));
+        connect(server,SIGNAL(renew_ui()),this,SLOT(ui_rplidarData()));
     }
     else
     {
@@ -334,7 +334,7 @@ void MainWindow::on_handPositionButton_clicked()
         ui->serverButton->setText("Server打开");
         ui->portLineEdit->setEnabled(true);
         socketStat = 0;
-        rplidarserver->getlisten();
+        server->getlisten();
     }
 }
 
@@ -351,14 +351,14 @@ void Tcpserver::listenConnection()
 {
     if(socketStat==1)
     {
-        rplidarserver->listen(QHostAddress::Any,port);
-        connect(rplidarserver,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
+        server->listen(QHostAddress::Any,port);
+        connect(server,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
     }
 
      else
     {
-     disconnect(rplidarserver,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
-     delete rplidarserver;
+        disconnect(server,SIGNAL(newConnection()),this,SLOT(acceptConnection()));
+        delete server;
     }
 
 
@@ -373,9 +373,19 @@ void Tcpserver::listenConnection()
  */
 void Tcpserver::acceptConnection()
 {
+    if(rplidarConnection)
+    {
+        shijueConnection =server->nextPendingConnection();
+        connect(shijueConnection,SIGNAL(readyRead()),this,SLOT(readwriteClient()));
+    }
 
-    rplidarConnection=rplidarserver->nextPendingConnection();
-    connect(rplidarConnection,SIGNAL(readyRead()),this,SLOT(readClient()));
+    else
+    {
+        rplidarConnection=server->nextPendingConnection();
+        connect(rplidarConnection,SIGNAL(readyRead()),this,SLOT(readClient()));
+    }
+
+
 }
 /* readClient
  * 描述：tcp接收槽函数并开启新线程
@@ -383,10 +393,25 @@ void Tcpserver::acceptConnection()
  * 输出：无
  */
 void Tcpserver::readClient()
-{   emit renew_ui();  // 发出信号->更新socketLineEditer
-    Thread1 *newthread = new Thread1;
-    str=rplidarConnection->readAll();
-    newthread->start();
+
+{   lidar=rplidarConnection->readAll();
+    emit renew_ui();  // 发出信号->更新socketLineEditer
+    Thread1 *newthread1 = new Thread1;
+    newthread1->start();
+
+}
+
+void Tcpserver::sockSend()
+{
+    shijueConnection->write(shijue);
+}
+
+void Tcpserver::readwriteClient()
+{
+shijue=shijueConnection->readAll();
+Thread2 *newthread2 = new Thread2;
+connect(newthread2,SIGNAL(sendData()),server,SLOT(sockSend()));
+newthread2->start();
 
 }
 /* ui_tcpData
@@ -394,9 +419,9 @@ void Tcpserver::readClient()
  * 输入：无
  * 输出：无
  */
-void MainWindow::ui_rplidarData()
+void MainWindow:: ui_rplidarData()
 {
-    ui->socketLineEditer->setText(str);
+    ui->socketLineEditer->setText(lidar);
 }
 
 /* on_comButton_clicked

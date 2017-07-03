@@ -4,7 +4,9 @@
 #include <QByteArray>
 
 extern int socketStat; //socket监听状态 0-未监听，1-监听
-extern QByteArray str;
+extern QByteArray lidar;
+extern QByteArray shijue;
+
 
 class Tcpserver : public QTcpServer
 {
@@ -12,6 +14,10 @@ class Tcpserver : public QTcpServer
 
 public:
     void getlisten() {this->listenConnection();}
+
+
+
+
 
 signals:
     void renew_ui();
@@ -24,10 +30,14 @@ private slots:
 
     void readClient();
 
+    void readwriteClient();
+
+    void sockSend();
+
 private :
 
-    QTcpSocket *rplidarConnection; //socket的tcp连接指针
-    QTcpSocket *shijueConnection;
+    QTcpSocket *rplidarConnection=NULL; //socket的tcp连接指针
+    QTcpSocket *shijueConnection=NULL;
 
 
 };
