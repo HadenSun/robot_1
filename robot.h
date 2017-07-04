@@ -22,6 +22,10 @@ public:
     float getXOfCoordinate();
     float getYOfCoordinate();
     float getTheta();
+    float getSpeedx();
+    float getSpeedy();
+    float getSpeedw();
+    float pwm[3];
 
 private:
     float xOfMap;           //像素
@@ -29,6 +33,10 @@ private:
     float theta;
     float xOfCoordinate;    //坐标
     float yOfCoordinate;
+   // float pwm[3];           //轮子的pwm
+    float Vx;		//机器人在坐标系x方向的速度
+    float Vy;		//机器人在坐标系y方向的速度
+    float W;		//机器人角速度,顺时针方向
     float centerYOfMap;     //起始位置像素
     float centerXOfMap;
     int mapType;            //球场类型，0-左半场，1-右半场

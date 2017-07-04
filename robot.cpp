@@ -112,3 +112,19 @@ float Robot::getTheta()
 {
     return theta;
 }
+
+float Robot::getSpeedx()
+{
+    return Vx;
+}
+
+float Robot::getSpeedy()
+{
+    return Vy;
+}
+
+float Robot::getSpeedw()
+{
+    return W;
+}
+

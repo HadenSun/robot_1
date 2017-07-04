@@ -3,7 +3,8 @@
 
 #include <QObject>
 #include "robot.h"
-
+#define PI 3.141592654f
+#define MOTOR_L 0.2013f
 
 class QGraphicsScene;
 class QKeyEvent;
@@ -26,6 +27,12 @@ public:
     void setRobotCoordinate(float x = 0,float y = 0,float theta = 0);
     void setRobotSpeedFromArm(float x = 0,float y = 0,float theta = 0);
     void getRobotCoordinate(float *x,float *y,float *theta);
+    void robot_straight_stage(float X_I,float Y_I,float Theta_I);
+    void set_motor_vx_vy_w(float vx,float vy,float w);
+    void robot_turnOrigin_stage(float theta);
+    float control1_W(float W);
+    float control2_W(float W);
+    float control3_W(float W);
 
 private:
     QGraphicsScene &scene;

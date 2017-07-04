@@ -609,7 +609,6 @@ void MainWindow::com_readData()
 
     if(data[0] == 0xA5 && data[1] == 0x5A)
     {
-        qDebug()<<"already in";
         if(comCheckSum(data,arr.size()))
         {
             palette.setColor(QPalette::Text,Qt::black);
